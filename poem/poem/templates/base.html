@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Redis&Python</title>
+    <!-- All in One SEO Pack 2.1.7 by Michael Torbert of Semper Fi Web Design[326,357] -->
+    <meta name="description" content="BeginMan. 享受编程和技术所带来的快乐 – http://blog.beginman.cn/" />
+    <meta name="keywords" content="Pyhton,Django,BeginMan,算法,JavaScript,Mysql,BeginMan,Android,Bash,book,Coding,CSS,Database,Google,HTML,IE,Java,Javascript,jQuery,Linus Torvalds,Linux,MySQL,OS,Programmer,programming,language,Python,Beginman的博客,SQL,Ubuntu,UI,Unix,vim,Web,beginman" />
+    <link rel='next' href='http://blog.beginman.cn/about/' />
+    <link rel="canonical" href="http://blog.beginman.cn/" />
+    <meta property="og:title" content="BeginMan - blog.beginman.cn" />
+    <meta property="og:type" content="blog" />
+    <meta property="og:url" content="http://blog.beginman.cn/" />
+    <!-- /all in one seo pack -->
+    <!-- Bootstrap core CSS -->
+    <link rel="shortcut icon" href="/site_media/img/favicon.ico">
+    <link href="/site_media/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="/site_media/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="/site_media/css/main.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    {% block css %}{% endblock %}
+  </head>
+  <body>
+    <div class="container theme-showcase" style="width: 1250px;">
+        <div class="row">
+            <!--左侧-->
+            <div class="col-md-12">
+                <div class="panel panel-default" style="padding: 20px;">
+                    <div class="panel-body">
+                        {% block content %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- /container -->
+
+    <script src="/site_media/js/jquery-2.0.1.min.js"></script>
+    <script src="/site_media/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/site_media/js/jquery.jbasicext.js"></script>
+
+  </body>
+	<script type="text/javascript">
+
+	</script>
+    {% block js %}{% endblock %}
+</html>

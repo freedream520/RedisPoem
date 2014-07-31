@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block css %}
+    <style>
+    .form-signin {
+          max-width: 500px;
+          padding: 15px;
+          margin: 20px auto;
+          margin-bottom: 100px;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+<p class="text-danger text-center">{% if msg %}{{ msg }}{% endif %}</p>
+<form class="form-signin" role="form" action="/login/" method='post'>{% csrf_token %}
+        <h2 class="form-signin-heading">Login</h2>
+        {{ form.as_p }}
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+<hr/>
+<br/>
+{% endblock %}
