@@ -3,9 +3,8 @@
 __author__ = 'beginman'
 from django.http import HttpResponseRedirect
 from django.conf import settings
+from common.userSystem import usSystem
 
-LOGIN_URLS = ['/manage/']
-ANONYMOUS_URLS = ['/manage/userGreat/', '/manage/user/']
 
 class Mymiddleware(object):
     def process_request(self, request):
@@ -15,13 +14,11 @@ class Mymiddleware(object):
         if path.startswith('/site_media/'):
             return None
         #验证登陆
-        if request.user.is_anonymous():
-            for obj in ANONYMOUS_URLS:
-                if path.startswith(obj):
-                    return None
+        ussys = usSystem(request)
+        if ussys.getUsObj():
+            pass
 
-            for obj in LOGIN_URLS:
-                if path.startswith(obj):
-                    return HttpResponseRedirect('/login/?url=%s' % path)
+
+
 
 

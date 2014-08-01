@@ -3,6 +3,7 @@ __author__ = 'beginman'
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from form import LoginForm
+from common.userSystem import usSystem
 import redis
 import datetime
 r = redis.StrictRedis(host='localhost', port='6379', db=0)
@@ -26,12 +27,16 @@ def usLogin(request):
                     if us_ == us and pwd_ == pwd:   # 校验成功
                         r.hincrby('user:%s' %uid, 'login_count', 1)     # 登陆次数累加
                         r.hset('user:%s' %uid, 'last_login_date', datetime.datetime.now())  # 添加最近登陆
-                        return HttpResponseRedirect('/')
+                        # set Cookies
+                        res = HttpResponseRedirect('/')
+                        ussys = usSystem(request, res, uid)
+                        if ussys.testCookie() and ussys.setCookieAndSession():
+                            return res
 
         context['msg'] = u'账号或密码错误'
         context['form'] = form
 
-
+    request.session.set_test_cookie()
     form = LoginForm()
     context['form'] = form
     return render(request, 'login.html', context)
