@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from form import LoginForm
 import redis
+import datetime
 r = redis.StrictRedis(host='localhost', port='6379', db=0)
 
 
@@ -23,6 +24,8 @@ def usLogin(request):
                 if r.exists('user:%s' %uid):    # 检查是否存在该用户键值(如user:1)
                     us_, pwd_ = r.hmget('user:%s' %uid, 'username', 'pwd')  # 获取该用户的用户名密码
                     if us_ == us and pwd_ == pwd:   # 校验成功
+                        r.hincrby('user:%s' %uid, 'login_count', 1)     # 登陆次数累加
+                        r.hset('user:%s' %uid, 'last_login_date', datetime.datetime.now())  # 添加最近登陆
                         return HttpResponseRedirect('/')
 
         context['msg'] = u'账号或密码错误'
