@@ -2,7 +2,6 @@
 __author__ = 'beginman'
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-# from superRedis import *
 from form import LoginForm
 import redis
 r = redis.StrictRedis(host='localhost', port='6379', db=0)
@@ -19,10 +18,13 @@ def usLogin(request):
         if form.is_valid():
             us = form.cleaned_data['us']
             pwd = form.cleaned_data['pwd']
-            red_us = r.get('us')
-            red_pwd = r.get('pwd')
-            if red_us and red_pwd and red_us == us and red_pwd == pwd:
-                return HttpResponseRedirect('/')
+            if r.exists('us:%s:id' %us):        # 检查是否存在该用户关系键值
+                uid = r.get('us:%s:id' %us)     # 获取该用户在user表中对应的id
+                if r.exists('user:%s' %uid):    # 检查是否存在该用户键值(如user:1)
+                    us_, pwd_ = r.hmget('user:%s' %uid, 'username', 'pwd')  # 获取该用户的用户名密码
+                    if us_ == us and pwd_ == pwd:   # 校验成功
+                        return HttpResponseRedirect('/')
+
         context['msg'] = u'账号或密码错误'
         context['form'] = form
 
